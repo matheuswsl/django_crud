@@ -1,0 +1,12 @@
+{% extends 'base_bootstrap.html' %}
+
+{% block welcome %}
+    <h2> Seja bem-vindo(a)</h2>
+{% endblock %}
+
+{% block content %}
+<p>Escolha uma das açoes: </p>
+<p>
+<p><a href="{% url 'banco_dados:lista' %}">Listar Cadastros</a></p>
+<p><a href="{% url 'banco_dados:create' %}">Criar um novo cadastro</a></p>
+{%endblock%}

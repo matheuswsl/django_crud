@@ -1,0 +1,80 @@
+{% extends 'base_bootstrap.html' %}
+
+{% load bootstrap4 %}
+
+{% bootstrap_javascript %}
+
+{% block welcome %}
+
+<h2> Cadastros </h2>
+
+<div style="text-align:right">
+<form>
+	<button style="background-color: #1881DC; border-color: #1881DC" type="button">
+	<a href="{% url 'home:main' %}"><i style="color: white;" class="fa fa-home"></i></a></button>
+<form>
+</div>
+{% endblock %}
+
+{% block content %}
+
+{% if cliente_list %}
+<form>
+	<input type="text" name="search" placeholder="Pesquisar..."
+	{% if search %} value="{{ search }}" {% endif %}></input>
+	<button style="background-color: #1881DC; border-color: #1881DC" type="submit">
+	<i style="color: white" class="fa fa-search" color="white"></i></a></button>
+	<button style="background-color: #1881DC; border-color: #1881DC" type="submit">
+	<a  href="{% url 'banco_dados:lista' %}"><i style="color: white;" class="fa fa-undo"></i></a></button>
+</form>
+<p>
+</p>
+    <table>
+	    <tr>
+		<th>Nome</th>
+		<th>RG</th>
+		<th>CPF</th>
+		<th>Data de Nascimento</th>
+		<th>Sexo</th>
+		<th>Telefone</th>
+		<th>Email</th>
+		<th></th>
+            </tr>
+        {% for cliente in cliente_list %}
+	    <tr>
+		<td>{{ cliente.nome }}</td>
+		<td>{{ cliente.rg }}</td>
+                <td>{{ cliente.cpf }}</td>
+		<td>{{ cliente.data_nasc }}</td>
+		<td>{{ cliente.sexo }}</td>
+		<td>{{ cliente.telefone }}</td>
+		<td>{{ cliente.email }}</td>
+		<td><a href="{% url 'banco_dados:lista' cliente.id %}" ><i class="fa fa-trash"></i></a>
+		<a href="{% url 'banco_dados:create' cliente.id %}"><i class="fa fa-pencil"></i></a></td>
+	    </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p><em> Não há clientes cadastrados </em></p>
+{% endif %}
+
+<script>
+	$("#msgExcluir").on('click', function(){
+               return confirm('Tem certeza que deseja excluir o cadastro?');
+	       }).dialog({
+	       modal:True,
+	       buttons:{
+		       "Sim": function(){
+			       return True;
+			       $(this).dialog('close');
+		               }
+		       "Não": function(){
+			       return False;
+			       $(this).dialog('close');
+			       }
+			}
+	       });
+</script>
+
+{% endblock %}
+

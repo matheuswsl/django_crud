@@ -1,0 +1,10 @@
+{% extends 'base_bootstrap.html' %}
+
+{% load bootstrap4 %}
+
+<h2>Atualização de Cadastro</h2>
+
+<form method='POST'>
+	{% if form_cliente %}
+	    {% bootstrap_form form_cliente %}
+	{% if 

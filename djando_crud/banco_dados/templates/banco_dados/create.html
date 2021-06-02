@@ -1,0 +1,45 @@
+{% extends 'base_bootstrap.html' %}
+
+{% load bootstrap4 %}
+
+{% bootstrap_javascript %}
+
+{% block welcome %}
+    <h2> Cadastrar </h2>
+    {{ message.level_tag }}
+{%endblock%}
+
+{% block script %}
+
+    document.getElementsByName("voltar").onclick = function(){window.history.back()};
+
+{%endblock%}
+
+{% block content %}
+
+    <form method='POST'>
+
+    {% csrf_token %}
+
+    {% if form_cliente %}
+        {% bootstrap_form form_cliente %}
+    {% endif %}
+
+    {% if form_telefone %}
+        {% bootstrap_form form_telefone %}
+    {% endif %}
+
+    {% if form_email %}
+        {% bootstrap_form form_email %}
+    {% endif %}
+
+    {% bootstrap_button "Salvar" button_type="submit" name="salvar" value="salvar" %}
+    {% bootstrap_button "Limpar" button_type="reset" %}
+    <button value="teste" onclick="window.history.back()" class="btn btn-primary">Voltar</button>
+
+    </form>
+
+<p></p>
+
+{% endblock %}
+        
